@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-# BlockChainDemo
-=======
-# BlockChainDemo
->>>>>>> e1bdb5e (first commit)
+区块链简易版
