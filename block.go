@@ -10,7 +10,7 @@ type Block struct {
 	nounce       int
 }
 
-func (block *Block) ComputeHash() string {
+func (block *Block) computeHash() string {
 	s := block.PreviousHash + toJSONString(block.Trans) + toJSONString(block.Time) + toJSONString(block.nounce)
 	return Sha256(s)
 }
@@ -25,11 +25,11 @@ func getAnswer(difficulty int) string {
 }
 
 func (this *Block) mine(difficulty int) {
-	this.Hash = this.ComputeHash()
+	this.Hash = this.computeHash()
 	for {
 		if this.Hash[0:difficulty] != getAnswer(difficulty) {
 			this.nounce++
-			this.Hash = this.ComputeHash()
+			this.Hash = this.computeHash()
 		} else {
 			break
 		}

@@ -12,13 +12,13 @@ type Chain struct {
 	transacPool []Transaction
 }
 
-func newChain() *Chain {
+func NewChain() *Chain {
 	return &Chain{[]Block{BigBang()}, 50.0, 2, []Transaction{}}
 }
 
 func BigBang() Block {
 	GenesisBlock := Block{Trans: []Transaction{{From: "god"}}, Time: time.Now()}
-	GenesisBlock.Hash = GenesisBlock.ComputeHash()
+	GenesisBlock.Hash = GenesisBlock.computeHash()
 	return GenesisBlock
 }
 
@@ -47,7 +47,7 @@ func (this *Chain) mineTransactionPool(mineRewardAdress string) {
 
 func (this *Chain) ValidateChain() bool {
 	if len(this.mychain) == 1 {
-		if this.mychain[0].Hash != this.mychain[0].ComputeHash() {
+		if this.mychain[0].Hash != this.mychain[0].computeHash() {
 			return false
 		}
 		return true
@@ -55,7 +55,7 @@ func (this *Chain) ValidateChain() bool {
 	for i := 1; i < len(this.mychain); i++ {
 		blocktovalidate := this.mychain[i]
 		//保证当前区块没有被篡改
-		if blocktovalidate.Hash != blocktovalidate.ComputeHash() {
+		if blocktovalidate.Hash != blocktovalidate.computeHash() {
 			fmt.Println("数据被篡改")
 			return false
 		}
